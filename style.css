@@ -6,8 +6,8 @@
         }
 
         :root {
-            --primary: #4b6cb7;
-            --secondary: #182848;
+            --primary: #3b78ef;
+            --secondary: #2f63dd;
             --success: #4CAF50;
             --warning: #FF9800;
             --danger: #F44336;
@@ -18,7 +18,7 @@
             --border: #e1e8ed;
             --shadow: rgba(0, 0, 0, 0.08);
             --date-bg: #e3f0ff;
-            --category-chinese: #4b6cb7;
+            --category-chinese: #3b78ef;
             --category-math: #5cb85c;
             --category-english: #f0ad4e;
             --category-sports: #d9534f;
@@ -237,8 +237,8 @@
 }
 
       .day-btn {
-    background: rgba(75, 108, 183, 0.1);
-    border: 1px solid rgba(75, 108, 183, 0.2);
+    background: rgba(59, 120, 239, 0.1);
+    border: 1px solid rgba(59, 120, 239, 0.2);
     border-radius: 8px;
     padding: 8px 2px;
     color: var(--primary);
@@ -256,7 +256,7 @@
 }
 
         .day-btn:hover {
-            background: rgba(75, 108, 183, 0.2);
+            background: rgba(59, 120, 239, 0.2);
         }
 
         .day-btn.active {
@@ -844,7 +844,7 @@
         }
 
         .task-title i {
-            color: #4b6cb7;
+            color: #3b78ef;
         }
 
         .time-row {
@@ -927,7 +927,7 @@
         .action-btn {
             background: #f0f7ff;
             border: none;
-            color: #4b6cb7;
+            color: #3b78ef;
             cursor: pointer;
             font-size: 1.1rem;
             width: 36px;
@@ -940,7 +940,7 @@
         }
 
         .action-btn:hover {
-            background: #4b6cb7;
+            background: #3b78ef;
             color: white;
             transform: scale(1.1);
         }
@@ -1652,7 +1652,7 @@
             width: 50px;
             height: 50px;
             border: 5px solid #f3f3f3;
-            border-top: 5px solid #4b6cb7;
+            border-top: 5px solid #3b78ef;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -1722,8 +1722,8 @@
         }
 
         .focus-action-btn {
-            background: rgba(75, 108, 183, 0.1);
-            border: 1px solid rgba(75, 108, 183, 0.2);
+            background: rgba(59, 120, 239, 0.1);
+            border: 1px solid rgba(59, 120, 239, 0.2);
             color: var(--primary);
             border-radius: 6px;
             width: 36px;
@@ -1737,7 +1737,7 @@
         }
 
         .focus-action-btn:hover {
-            background: rgba(75, 108, 183, 0.2);
+            background: rgba(59, 120, 239, 0.2);
         }
 
         
@@ -1844,7 +1844,7 @@
 
         .focus-detail-item h4 {
             margin-bottom: 10px;
-            color: #4b6cb7;
+            color: #3b78ef;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1960,7 +1960,7 @@
         }
 
         .backup-btn {
-            background: linear-gradient(to bottom, #4b6cb7, #3a5795);
+            background: linear-gradient(to bottom, #3b78ef, #2f63dd);
             color: white;
             border: none;
             border-radius: 50px;
@@ -1970,7 +1970,7 @@
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(75, 108, 183, 0.4);
+            box-shadow: 0 4px 15px rgba(59, 120, 239, 0.4);
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -1978,7 +1978,7 @@
 
         .backup-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(75, 108, 183, 0.6);
+            box-shadow: 0 6px 20px rgba(59, 120, 239, 0.6);
         }
 
         .backup-btn i {
@@ -2370,7 +2370,7 @@
 .focus-action-btn {
     background: #f0f7ff;
     border: none;
-    color: #4b6cb7;
+    color: #3b78ef;
     cursor: pointer;
     font-size: 1.1rem;
     width: 36px;
@@ -2383,7 +2383,7 @@
 }
 
 .focus-action-btn:hover {
-    background: #4b6cb7;
+    background: #3b78ef;
     color: white;
     transform: scale(1.1);
 }
@@ -2678,7 +2678,7 @@
     padding: 15px;
     background-color: #f8f9fa;
     border-radius: 10px;
-    border-left: 4px solid #4b6cb7;
+    border-left: 4px solid #3b78ef;
 }
 
 .import-option {
@@ -2771,18 +2771,18 @@
 }
 
 .task-card.drag-over {
-    border: 3px dashed #4b6cb7;
+    border: 3px dashed #3b78ef;
     background-color: #e3f0ff;
     margin: 8px 0;
-    box-shadow: 0 4px 12px rgba(75, 108, 183, 0.3);
+    box-shadow: 0 4px 12px rgba(59, 120, 239, 0.3);
 }
 
 .task-card.drag-insert-above {
-    border-top: 4px solid #4b6cb7 !important;
+    border-top: 4px solid #3b78ef !important;
 }
 
 .task-card.drag-insert-below {
-    border-bottom: 4px solid #4b6cb7 !important;
+    border-bottom: 4px solid #3b78ef !important;
 }
 
 
@@ -3394,15 +3394,15 @@ header .header-right {
 }
 
 .icon-option:hover {
-    border-color: #4b6cb7;
-    color: #4b6cb7;
+    border-color: #3b78ef;
+    color: #3b78ef;
     transform: scale(1.1);
 }
 
 .icon-option.selected {
-    border-color: #4b6cb7;
+    border-color: #3b78ef;
     background-color: #e3f0ff;
-    color: #4b6cb7;
+    color: #3b78ef;
     transform: scale(1.05);
 }
 
@@ -4468,19 +4468,19 @@ header .header-right {
 }
 
 input:checked + .slider {
-    background-color: #4b6cb7;
+    background-color: #3b78ef;
 }
 
 input:checked + .slider:before {
     transform: translateX(26px);
 }
 .week-day-btn{
-  width: 32px; height: 32px; border: 1px solid #4b6cb7;
-  background: #fff; color: #4b6cb7; border-radius: 4px;
+  width: 32px; height: 32px; border: 1px solid #3b78ef;
+  background: #fff; color: #3b78ef; border-radius: 4px;
   cursor: pointer; font-size: 14px; line-height: 1;
 }
 .week-day-btn.active{
-  background: #4b6cb7; color: #fff;
+  background: #3b78ef; color: #fff;
 }
 
 .score-card {
@@ -4544,7 +4544,7 @@ input:checked + .slider:before {
 }
 
 .score-main-title i {
-    color: #4b6cb7;
+    color: #3b78ef;
 }
 
 .score-subtitle {
@@ -5140,7 +5140,7 @@ input:checked + .slider:before {
 
 .icon i {
     font-size: 3rem; 
-    color: #4b6cb7; 
+    color: #3b78ef; 
     transition: transform 0.2s ease; 
 }
 
@@ -5823,4 +5823,3 @@ input:checked + .slider:before {
     background-color: #fadbd8; 
     border: 1px solid #e2a7a3; 
 }
-

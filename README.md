@@ -53,6 +53,7 @@ server {
 
 - `source_index.html`：历史抓取快照（保留）
 - `README.md`：项目说明文档
+- `docs/设计说明书.md`：系统设计说明书（含功能详细描述）
 
 ## 说明
 

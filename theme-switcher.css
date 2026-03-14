@@ -30,8 +30,8 @@
 
 /* Theme palettes by overriding root vars already used by the site */
 body[data-theme="classic"] {
-  --primary: #4b6cb7;
-  --secondary: #182848;
+  --primary: #3b78ef;
+  --secondary: #2f63dd;
   --success: #4CAF50;
   --warning: #FF9800;
   --danger: #F44336;
