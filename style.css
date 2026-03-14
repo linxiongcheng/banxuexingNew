@@ -172,7 +172,7 @@
         }
 
         .today-btn {
-            background: var(--warning);
+            background: #4caf50;
             color: white;
             border: none;
             border-radius: 8px;
@@ -186,7 +186,7 @@
         }
 
         .today-btn:hover {
-            background: #e68a00;
+            background: #3f9443;
         }
 
         .date-controls {
@@ -267,10 +267,10 @@
         }
 
         .day-btn.today {
-            background: var(--warning); 
-            border: 1px solid #ffcc00;
+            background: #4caf50;
+            border: 1px solid #3f9443;
             font-weight: bold;
-            color: #333;
+            color: #fff;
         }
 
         .day-name {
@@ -337,8 +337,8 @@
         }
 
         .calendar-day.today {
-            background: #e3f0ff;
-            color: var(--primary);
+            background: #4caf50;
+            color: #fff;
             font-weight: bold;
         }
 
@@ -2429,7 +2429,7 @@
     font-weight: bold;
 }
 .day-btn.today {
-    background: var(--warning);
+    background: #4caf50;
     color: white;
 }
 .day-btn.active {

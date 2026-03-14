@@ -57,7 +57,7 @@
       <div class="title-container">
         伴学星--每天进步一点点
       </div>
-      <p id="subTitle" style="margin: 5px 0 0 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">已连续打卡<span id="subDays">0</span>天，累计完成<span id="subTasks">0</span>个学习计划，继续加油！</p>
+      <p id="subTitle" style="margin: 5px 0 0 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">已连续打卡<span id="subDays">0</span>天，累计完成<span id="subTasks">0</span>个成长计划，继续加油！</p>
     </div>
     <div class="header-right">
       <div class="account-controls">
@@ -126,7 +126,7 @@
                 <div class="sidebar collapsed" id="sidebar">
                     
 <div class="sidebar-header">
-    <h2 id="sidebarTitle"><i class="fas fa-list" data-fallback="类"></i> 计划模版管理</h2>
+    <h2 id="sidebarTitle"><i class="fas fa-list" data-fallback="类"></i> 任务管理模板</h2>
     <button class="add-category-btn" id="addCategoryBtn">+</button>
 </div>
 
@@ -140,7 +140,7 @@
                         
                                     <div class="header-row">
             <div style="display: flex; align-items: center; gap: 15px;">
-                <h2 style="margin: 0;"><i class="fas fa-tasks" data-fallback="任"></i> 学习计划</h2>
+                <h2 style="margin: 0;"><i class="fas fa-tasks" data-fallback="任"></i> 成长计划</h2>
                 
                 <div class="sort-container" style="position: relative; display: inline-block;">
                     <button class="sort-btn" id="sortBtn" style="background: #6c757d; border: none; border-radius: 6px; padding: 6px 10px; color: white; cursor: pointer; font-size: 0.9rem;">
@@ -661,7 +661,7 @@
         <i class="fas fa-upload" data-fallback="上"></i> 导入数据
     </button>
     <button class="data-btn clear-btn" id="clearDataBtn">
-        <i class="fas fa-trash" data-fallback="清"></i> 清空学习计划
+        <i class="fas fa-trash" data-fallback="清"></i> 清空所有计划
     </button>
 </div>
 
@@ -1324,7 +1324,7 @@
             <div class="delete-options" id="deleteOptions">
                 <div class="delete-option">
                     <input type="radio" name="deleteOption" id="deleteSingle" value="single" checked>
-                    <label for="deleteSingle">仅删除当前日期的学习计划</label>
+                    <label for="deleteSingle">仅删除当前日期的成长计划</label>
                 </div>
                 <div class="delete-option">
                     <input type="radio" name="deleteOption" id="deleteRecurring" value="recurring">
@@ -1344,8 +1344,8 @@
     <div class="confirmation-content">
         <div class="confirmation-body">
             <h3><i class="fas fa-exclamation-triangle" style="color: #F44336; font-size: 48px; margin-bottom: 20px;"></i></h3>
-            <h3>确认清空所有学习计划数据</h3>
-            <p style="margin: 15px 0;">此操作将删除所有学习计划数据，但保留分类和任务模板，且不可恢复！</p>
+            <h3>确认清空所有计划数据</h3>
+            <p style="margin: 15px 0;">此操作将删除所有成长计划数据，但保留分类和任务模板，且不可恢复！</p>
 
         </div>
         <div class="confirmation-actions">
@@ -2113,7 +2113,7 @@
                 </div>
 
                 <div class="password-control-item">
-                    <div class="password-control-label">清空学习计划</div>
+                    <div class="password-control-label">清空所有计划</div>
                     <label class="switch">
                         <input type="checkbox" id="clearStudyPlanSwitch" checked>
                         <span class="slider"></span>
@@ -2339,6 +2339,187 @@
       subtree: true,
       characterData: true
     });
+  })();
+</script>
+<script>
+  (function () {
+    function normalizeEmptyStateText(container) {
+      if (!container) {
+        return;
+      }
+
+      var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+      var node;
+
+      while ((node = walker.nextNode())) {
+        var text = node.nodeValue;
+        if (!text || text.indexOf('添加计划') === -1 && text.indexOf('今日没有学习计划') === -1) {
+          continue;
+        }
+
+        var next = text
+          .replace(/今日没有学习计划[，,、\s]*/g, '')
+          .replace(/点击["“]添加计划["”]按钮开始计划您的一天/g, '点击"添加计划"开始成长的一天')
+          .replace(/点击["“]添加计划["”]按钮开始成长的一天/g, '点击"添加计划"开始成长的一天')
+          .replace(/^[，,。\s]+/, '');
+
+        if (next !== text) {
+          node.nodeValue = next;
+        }
+      }
+    }
+
+    function makeInlineAddPlanClickable(container) {
+      if (!container) {
+        return;
+      }
+
+      var nodes = container.querySelectorAll('*');
+      for (var i = 0; i < nodes.length; i += 1) {
+        var el = nodes[i];
+        if (!el || !el.innerHTML || el.innerHTML.indexOf('empty-add-plan-link') !== -1) {
+          continue;
+        }
+
+        var html = el.innerHTML;
+        var next = html
+          .replace(
+            '点击"添加计划"开始成长的一天',
+            '点击<span class="empty-add-plan-link" role="button" tabindex="0" style="color: var(--primary); text-decoration: underline; cursor: pointer;">"添加计划"</span>开始成长的一天'
+          )
+          .replace(
+            '点击“添加计划”开始成长的一天',
+            '点击<span class="empty-add-plan-link" role="button" tabindex="0" style="color: var(--primary); text-decoration: underline; cursor: pointer;">“添加计划”</span>开始成长的一天'
+          );
+
+        if (next !== html) {
+          el.innerHTML = next;
+        }
+      }
+    }
+
+    function bindInlineAddPlanLink(container) {
+      if (!container || container.dataset.inlinePlanBound === '1') {
+        return;
+      }
+
+      container.dataset.inlinePlanBound = '1';
+
+      container.addEventListener('click', function (event) {
+        var target = event.target;
+        if (target && target.classList && target.classList.contains('empty-add-plan-link')) {
+          event.preventDefault();
+          openTaskModalDirectly();
+        }
+      });
+
+      container.addEventListener('keydown', function (event) {
+        var target = event.target;
+        var key = event.key;
+        if (
+          target &&
+          target.classList &&
+          target.classList.contains('empty-add-plan-link') &&
+          (key === 'Enter' || key === ' ' || key === 'Spacebar')
+        ) {
+          event.preventDefault();
+          openTaskModalDirectly();
+        }
+      });
+    }
+
+    function openTaskModalDirectly() {
+      if (typeof window.showTaskModal === 'function') {
+        window.showTaskModal();
+        return;
+      }
+      if (typeof window.openTaskModal === 'function') {
+        window.openTaskModal();
+        return;
+      }
+
+      var modal = document.getElementById('taskModal');
+      if (!modal) {
+        return;
+      }
+
+      var modalTitle = document.getElementById('modalTitle');
+      if (modalTitle) {
+        modalTitle.textContent = '添加新计划';
+      }
+
+      var editingTaskId = document.getElementById('editingTaskId');
+      if (editingTaskId) {
+        editingTaskId.value = '';
+      }
+
+      var today = new Date().toISOString().slice(0, 10);
+      var startDate = document.getElementById('startDate');
+      var endDate = document.getElementById('endDate');
+      if (startDate && !startDate.value) {
+        startDate.value = today;
+      }
+      if (endDate && !endDate.value) {
+        endDate.value = today;
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function bindDirectAddTaskClick() {
+      var addTaskBtn = document.getElementById('addTaskBtn');
+      if (!addTaskBtn || addTaskBtn.dataset.directBound === '1') {
+        return;
+      }
+
+      addTaskBtn.dataset.directBound = '1';
+      addTaskBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        openTaskModalDirectly();
+      }, true);
+    }
+
+    function initTaskEmptyStatePatch() {
+      var taskListMain = document.getElementById('taskListMain');
+      normalizeEmptyStateText(taskListMain);
+      makeInlineAddPlanClickable(taskListMain);
+      bindInlineAddPlanLink(taskListMain);
+
+      var observer = new MutationObserver(function () {
+        normalizeEmptyStateText(taskListMain);
+        makeInlineAddPlanClickable(taskListMain);
+      });
+
+      if (taskListMain) {
+        observer.observe(taskListMain, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
+      }
+    }
+
+    function init() {
+      bindDirectAddTaskClick();
+      initTaskEmptyStatePatch();
+
+      // Button may be re-rendered by runtime scripts; keep binding resilient.
+      var bodyObserver = new MutationObserver(function () {
+        bindDirectAddTaskClick();
+      });
+
+      bodyObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   })();
 </script>
 <audio id="successSound" preload="auto">
