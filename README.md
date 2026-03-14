@@ -7,11 +7,15 @@
 - `index.html`
 - `style.css`
 - `script1.js`
+- `auth-config.js`
+- `auth.js`
 - `theme-switcher.css`
 - `theme-switcher.js`
 - `chart.min.js`
 - `chartjs-plugin-datalabels.min.js`
 - `success.wav`
+- `login.html`
+- `login.css`
 
 ## 本地运行
 
@@ -23,11 +27,23 @@ python -m http.server 5500
 
 访问：`http://localhost:5500`
 
+首次访问 `index.html` 时，未登录会自动跳转到 `login.html`。
+
 ## 主题切换
 
 - 页面右上角新增“主题”下拉框
 - 可选主题：`经典蓝`、`海洋青`、`森林绿`、`日落橙`
 - 主题选择会保存到浏览器 `localStorage`（键名：`banxuexing_theme`）
+
+## 登录配置
+
+- 当前登录页：`login.html`
+- 首页鉴权入口：`index.html`
+- 默认账号：`admin`
+- 默认密码：`admin666`
+- 用户配置文件：`auth-config.js`
+
+后续新增固定用户时，直接修改 `auth-config.js` 里的列表即可。
 
 ## 线上部署（静态站）
 

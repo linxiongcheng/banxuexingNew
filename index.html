@@ -6,6 +6,40 @@
     <title>伴学星 - 每天进步一点点</title>
 <script src="chart.min.js"></script>
 <script src="chartjs-plugin-datalabels.min.js"></script>
+<script src="auth-config.js"></script>
+<script src="auth.js"></script>
+<script>
+  window.BanxuexingAuth.guardHome();
+</script>
+<script>
+  (function () {
+    function migrateDefaultAccountName() {
+      for (var i = 0; i < window.localStorage.length; i += 1) {
+        var key = window.localStorage.key(i);
+        if (!key) {
+          continue;
+        }
+
+        var raw = window.localStorage.getItem(key);
+        if (!raw || raw.indexOf('安安') === -1) {
+          continue;
+        }
+
+        try {
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.default && parsed.default.name === '安安') {
+            parsed.default.name = '伴学童';
+            window.localStorage.setItem(key, JSON.stringify(parsed));
+          }
+        } catch (error) {
+          // ignore non-JSON values
+        }
+      }
+    }
+
+    migrateDefaultAccountName();
+  })();
+</script>
     <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="theme-switcher.css">
@@ -28,7 +62,7 @@
     <div class="header-right">
       <div class="account-controls">
         <button class="account-trigger" id="accountTrigger">
-          <span id="currentAccountName">安安</span>
+          <span id="currentAccountName">伴学童</span>
           <i class="fas fa-chevron-down"></i>
         </button>
       </div>
@@ -2261,6 +2295,52 @@
   })();
 </script>
 <script src="theme-switcher.js"></script>
+<script>
+  window.BanxuexingAuth.mountHomeAuthUi();
+</script>
+<script>
+  (function () {
+    function replaceDefaultDisplayName(root) {
+      if (!root) {
+        return;
+      }
+
+      if (root.nodeType === 3) {
+        if (root.nodeValue && root.nodeValue.trim() === '安安') {
+          root.nodeValue = root.nodeValue.replace('安安', '伴学童');
+        }
+        return;
+      }
+
+      if (root.nodeType !== 1) {
+        return;
+      }
+
+      if (root.id === 'currentAccountName' && root.textContent.trim() === '安安') {
+        root.textContent = '伴学童';
+      }
+
+      root.childNodes.forEach(replaceDefaultDisplayName);
+    }
+
+    replaceDefaultDisplayName(document.body);
+
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(replaceDefaultDisplayName);
+        if (mutation.type === 'characterData') {
+          replaceDefaultDisplayName(mutation.target);
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  })();
+</script>
 <audio id="successSound" preload="auto">
     <source src="success.wav" type="audio/wav">
     您的浏览器不支持音频播放。

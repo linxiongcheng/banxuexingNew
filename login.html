@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 伴学星</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="auth-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+      window.BanxuexingAuth.guardLogin();
+    </script>
+</head>
+<body>
+    <main class="login-shell">
+        <section class="login-brand">
+            <div class="login-brand-inner">
+                <h1>伴学星</h1>
+                <ul class="login-feature-list" aria-label="功能介绍">
+                    <li>学习计划管理</li>
+                    <li>成就与积分激励</li>
+                    <li>成绩与统计分析</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="login-card">
+            <div class="login-panel">
+                <h2>账号登录</h2>
+                <p class="login-subtitle">请输入用户名和密码，验证通过后将自动进入首页。</p>
+
+                <p class="login-error" id="loginError"></p>
+
+                <form id="loginForm" novalidate>
+                    <div class="login-field">
+                        <label for="loginUsername">用户名</label>
+                        <input id="loginUsername" name="username" type="text" autocomplete="username" placeholder="请输入用户名" required>
+                    </div>
+
+                    <div class="login-field">
+                        <label for="loginPassword">密码</label>
+                        <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="请输入密码" required>
+                    </div>
+
+                    <button class="login-submit" type="submit">登录进入首页</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+      window.BanxuexingAuth.mountLoginForm();
+    </script>
+</body>
+</html>
