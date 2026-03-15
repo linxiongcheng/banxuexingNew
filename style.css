@@ -729,6 +729,21 @@
             gap: 15px;
         }
 
+        .empty-add-plan-link {
+            color: var(--primary);
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-color: currentColor;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .empty-add-plan-link:hover,
+        .empty-add-plan-link:focus {
+            color: var(--secondary);
+            outline: none;
+        }
+
                     .task-card {
             background: white;
             border-radius: 16px;

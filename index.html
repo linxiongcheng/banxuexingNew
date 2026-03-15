@@ -2343,6 +2343,66 @@
 </script>
 <script>
   (function () {
+    function buildClickableEmptyStateText(container) {
+      if (!container) {
+        return;
+      }
+
+      var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+      var textNodes = [];
+      var current;
+      while ((current = walker.nextNode())) {
+        textNodes.push(current);
+      }
+
+      textNodes.forEach(function (node) {
+        var parent = node.parentElement;
+        if (parent && parent.closest('.empty-add-plan-link')) {
+          return;
+        }
+
+        var text = node.nodeValue;
+        if (!text || text.indexOf('添加计划') === -1) {
+          return;
+        }
+
+        var normalized = text
+          .replace(/今日没有学习计划[，,、\s]*/g, '')
+          .replace(/点击["“]添加计划["”]按钮开始计划您的一天/g, '点击"添加计划"开始成长的一天')
+          .replace(/点击["“]添加计划["”]按钮开始成长的一天/g, '点击"添加计划"开始成长的一天')
+          .replace(/^[，,。\s]+/, '');
+
+        var token = '"添加计划"';
+        var tokenIndex = normalized.indexOf(token);
+        if (tokenIndex === -1) {
+          node.nodeValue = normalized;
+          return;
+        }
+
+        var before = normalized.slice(0, tokenIndex);
+        var after = normalized.slice(tokenIndex + token.length);
+        var frag = document.createDocumentFragment();
+
+        if (before) {
+          frag.appendChild(document.createTextNode(before));
+        }
+
+        var clickable = document.createElement('span');
+        clickable.className = 'empty-add-plan-link';
+        clickable.setAttribute('role', 'button');
+        clickable.setAttribute('tabindex', '0');
+        clickable.setAttribute('aria-label', '添加计划');
+        clickable.textContent = token;
+        frag.appendChild(clickable);
+
+        if (after) {
+          frag.appendChild(document.createTextNode(after));
+        }
+
+        node.parentNode.replaceChild(frag, node);
+      });
+    }
+
     function normalizeEmptyStateText(container) {
       if (!container) {
         return;
@@ -2367,6 +2427,8 @@
           node.nodeValue = next;
         }
       }
+
+      buildClickableEmptyStateText(container);
     }
 
     function openTaskModalDirectly() {
@@ -2421,8 +2483,38 @@
       }, true);
     }
 
+    function bindEmptyStateAddTaskClick() {
+      var taskListMain = document.getElementById('taskListMain');
+      if (!taskListMain || taskListMain.dataset.emptyAddBound === '1') {
+        return;
+      }
+
+      taskListMain.dataset.emptyAddBound = '1';
+      taskListMain.addEventListener('click', function (event) {
+        var target = event.target.closest('.empty-add-plan-link');
+        if (!target) {
+          return;
+        }
+        event.preventDefault();
+        openTaskModalDirectly();
+      });
+
+      taskListMain.addEventListener('keydown', function (event) {
+        var target = event.target.closest('.empty-add-plan-link');
+        if (!target) {
+          return;
+        }
+        if (event.key !== 'Enter' && event.key !== ' ') {
+          return;
+        }
+        event.preventDefault();
+        openTaskModalDirectly();
+      });
+    }
+
     function initTaskEmptyStatePatch() {
       var taskListMain = document.getElementById('taskListMain');
+      bindEmptyStateAddTaskClick();
       normalizeEmptyStateText(taskListMain);
 
       var observer = new MutationObserver(function () {
