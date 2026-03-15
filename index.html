@@ -55,7 +55,7 @@
   <div class="header-content">
     <div class="header-left">
       <div class="title-container">
-        伴学星--每天进步一点点
+        伴学星/每天进步一点点
       </div>
       <p id="subTitle" style="margin: 5px 0 0 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.8);">已连续打卡<span id="subDays">0</span>天，累计完成<span id="subTasks">0</span>个成长计划，继续加油！</p>
     </div>
@@ -666,7 +666,7 @@
 </div>
 
 <footer>
-    <p>伴学星 - 每天进步一点点 | 由小红书博主“沐沐”原创制作 </p>
+    <p>伴学星 - 每天进步一点点 | 由小红书博主“沐沐的心灵宝典”原创制作 </p>
 </footer>
 </div>
 
@@ -2369,65 +2369,6 @@
       }
     }
 
-    function makeInlineAddPlanClickable(container) {
-      if (!container) {
-        return;
-      }
-
-      var nodes = container.querySelectorAll('*');
-      for (var i = 0; i < nodes.length; i += 1) {
-        var el = nodes[i];
-        if (!el || !el.innerHTML || el.innerHTML.indexOf('empty-add-plan-link') !== -1) {
-          continue;
-        }
-
-        var html = el.innerHTML;
-        var next = html
-          .replace(
-            '点击"添加计划"开始成长的一天',
-            '点击<span class="empty-add-plan-link" role="button" tabindex="0" style="color: var(--primary); text-decoration: underline; cursor: pointer;">"添加计划"</span>开始成长的一天'
-          )
-          .replace(
-            '点击“添加计划”开始成长的一天',
-            '点击<span class="empty-add-plan-link" role="button" tabindex="0" style="color: var(--primary); text-decoration: underline; cursor: pointer;">“添加计划”</span>开始成长的一天'
-          );
-
-        if (next !== html) {
-          el.innerHTML = next;
-        }
-      }
-    }
-
-    function bindInlineAddPlanLink(container) {
-      if (!container || container.dataset.inlinePlanBound === '1') {
-        return;
-      }
-
-      container.dataset.inlinePlanBound = '1';
-
-      container.addEventListener('click', function (event) {
-        var target = event.target;
-        if (target && target.classList && target.classList.contains('empty-add-plan-link')) {
-          event.preventDefault();
-          openTaskModalDirectly();
-        }
-      });
-
-      container.addEventListener('keydown', function (event) {
-        var target = event.target;
-        var key = event.key;
-        if (
-          target &&
-          target.classList &&
-          target.classList.contains('empty-add-plan-link') &&
-          (key === 'Enter' || key === ' ' || key === 'Spacebar')
-        ) {
-          event.preventDefault();
-          openTaskModalDirectly();
-        }
-      });
-    }
-
     function openTaskModalDirectly() {
       if (typeof window.showTaskModal === 'function') {
         window.showTaskModal();
@@ -2483,12 +2424,9 @@
     function initTaskEmptyStatePatch() {
       var taskListMain = document.getElementById('taskListMain');
       normalizeEmptyStateText(taskListMain);
-      makeInlineAddPlanClickable(taskListMain);
-      bindInlineAddPlanLink(taskListMain);
 
       var observer = new MutationObserver(function () {
         normalizeEmptyStateText(taskListMain);
-        makeInlineAddPlanClickable(taskListMain);
       });
 
       if (taskListMain) {
